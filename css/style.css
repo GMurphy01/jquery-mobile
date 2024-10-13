@@ -1,0 +1,8 @@
+/*Make the about page list items a darker green*/
+#aboutList li {
+  background-color: #7d9272;
+}
+
+#navbarListItem a {
+  background-color: #1b4d00;
+}

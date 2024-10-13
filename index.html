@@ -1,0 +1,427 @@
+<!--
+    Griffin Murphy - 8818757
+    Aasim Mukadam - 8834265
+    Eazer Daguay - 8754133
+    Karolina Ziembicki - 8816815
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Double check some of these-->
+    <link rel="stylesheet" href="css/lib/jquery.mobile-1.4.5.min.css" />
+    <link
+      rel="stylesheet"
+      href="css/lib/jquery.mobile.structure-1.4.5.min.css"
+    />
+    <link rel="stylesheet" href="css/lib/jquery.mobile.theme-1.4.5.min.css" />
+    <script src="js/lib/jquery-2.1.4.js"></script>
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+    <script src="js/lib/jquery.validate.js"></script>
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="css/style.css" />
+    <!--Themes-->
+    <link rel="stylesheet" href="css/Themes/FinalProjectTheme.css"/>
+    <!--Database Scripts-->
+    <script src="js/IndexedDBManager.js"></script>
+    <script src="js/expenseManager.js"></script>
+    <title>Final Project</title>
+  </head>
+  <body>
+    <!-- MUST CONTAIN
+- Atleast 4 pages related to project functionality
+- 1 About page with developer info
+- 2 Tables where 1 table must be significant
+- Forms with validation
+-->
+
+    <!-- ADVANCED FEATURES
+- At least one native feature???????????? Ex. Native file system, geolocation
+- Have atleast 3 tables in database (Something about significant table lookup and lookup table differences)?
+-->
+
+    <!-- Deductions
+- Less than 2 significant tables
+- Missing APK file
+- Seperate APK upload not done
+- Missing icon/developer in the config.xml
+- No commented JavaScript code and screenshots documents ** 50! **
+- Bug
+- No demo ** 60! **
+- Poor response during demo
+-->
+
+    <!-- Clarifications
+- A significant table supports all CRUD operations and has frequently changing content. 
+-->
+    <!--Home Page-->
+    <div id="pageHome" data-role="page">
+      <!--Completed Header-->
+      <header data-role="header" data-position="fixed">
+        <!--Back Button-->
+        <a
+          data-role="button"
+          data-icon="back"
+          data-inline="true"
+          data-rel="back"
+          >Back
+        </a>
+        <h1>Smart Spend!</h1>
+      </header>
+      <!--Home Screen Options-->
+      <section id="homeMainSection" data-role="content">
+        <ul id="homeList" data-role="listview" class="ui-listview-inset">
+          <li>
+            <a href="#pageExpenses" data-theme="a">
+              <h3>Expense Tracking</h3>
+              <p>Check and see what you've been spending your money on</p>
+            </a>
+          </li>
+          <li>
+            <a href="#pageBudgeting" data-theme="a">
+              <h3>Budget Tracking</h3>
+              <p>
+                View your personal dashboard for tracking your custom budget
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="#pageSavings" data-theme="a">
+              <h3>Savings and Investments</h3>
+              <p>Manage your savings and investments</p>
+            </a>
+          </li>
+          <li>
+            <a href="#pageAbout" data-theme="a">
+              <h3>About the Devs</h3>
+              <p>Learn more about the developers</p>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!--Completed Footer-->
+      <footer data-role="footer" data-position="fixed">
+        <!--Nav bar-->
+        <div data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <a
+                href="#pageHome"
+                data-icon="home"
+                class="ui-btn-active ui-state-persist"
+                >Home</a
+              >
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageExpenses" data-icon="calendar">Expenses</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageBudgeting" data-icon="user">Budgeting</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageSavings" data-icon="shop">Savings & Investments</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageAbout" data-icon="info">About the Devs</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!--Expenses Page-->
+    <div id="pageExpenses" data-role="page">
+      <!--Completed Header-->
+      <header data-role="header" data-position="fixed">
+        <!--Back Button-->
+        <a
+          data-role="button"
+          data-icon="back"
+          data-inline="true"
+          data-rel="back"
+          >Back
+        </a>
+        <h1>Expense Tracker</h1>
+      </header>
+      <!--Expense Screen Options-->
+      <div role="main" class="ui-content">
+        <table data-role="table" id="expenseTable"  class="ui-responsive table-stroke">
+            <thead>
+                <tr>
+                    <th data-priority="1">Date</th>
+                    <th data-priority="2">Category</th>
+                    <th data-priority="3">Amount</th>
+                    <th data-priority="4">Notes</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated dynamically -->
+            </tbody>
+        </table>
+        <a href="#addExpensePage" class="ui-btn ui-btn-icon-right ui-icon-plus">Add Expense</a>
+    </div><!-- /content -->
+
+    <!--Completed Footer-->
+    <footer data-role="footer" data-position="fixed">
+        <!--Nav bar-->
+        <div data-role="navbar" data-iconpos="top">
+          <ul>
+            <li id="navbarListItem">
+              <a href="#pageHome" data-icon="home">Home</a>
+            </li>
+            <li>
+              <a
+                href="#pageExpenses"
+                data-icon="calendar"
+                class="ui-btn-active ui-state-persist"
+                >Expenses</a
+              >
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageBudgeting" data-icon="user">Budgeting</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageSavings" data-icon="shop">Savings & Investments</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageAbout" data-icon="info">About the Devs</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+</div><!-- /page -->
+
+<!-- Add Expense Page -->
+<div data-role="page" id="addExpensePage">
+    <div data-role="header">
+        <h1>Add Expense</h1>
+        <!--Back Button-->
+        <a
+          data-role="button"
+          data-icon="back"
+          data-inline="true"
+          data-rel="back"
+          >Back
+        </a>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <form id="addExpenseForm">
+            <label for="date">Date:</label>
+            <input type="date" name="date" id="date" required>
+
+            <label for="category">Category:</label>
+            <select name="category" id="category" required>
+                <option value="Food">Food</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Bills">Bills</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <label for="amount">Amount:</label>
+            <input type="number" name="amount" id="amount" required>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes"></textarea>
+
+            <button type="submit" data-inline="true">Save</button>
+        </form>
+    </div><!-- /content -->
+    <!--Completed Footer-->
+    <footer data-role="footer" data-position="fixed">
+        <!--Nav bar-->
+        <div data-role="navbar" data-iconpos="top">
+        <ul>
+            <li id="navbarListItem">
+            <a href="#pageHome" data-icon="home">Home</a>
+            </li>
+            <li id="navbarListItem">
+            <a
+                href="#pageExpenses"
+                data-icon="calendar"
+                >Expenses</a
+            >
+            </li>
+            <li id="navbarListItem">
+            <a href="#pageBudgeting" data-icon="user">Budgeting</a>
+            </li>
+            <li id="navbarListItem">
+            <a href="#pageSavings" data-icon="shop">Savings & Investments</a>
+            </li>
+            <li id="navbarListItem">
+            <a href="#pageAbout" data-icon="info">About the Devs</a>
+            </li>
+        </ul>
+        </div>
+    </footer>
+</div><!-- /page -->
+      
+    </div>
+
+    <!--Budgeting Page-->
+    <div id="pageBudgeting" data-role="page">
+      <!--Completed Header-->
+      <header data-role="header" data-position="fixed">
+        <!--Back Button-->
+        <a
+          data-role="button"
+          data-icon="back"
+          data-inline="true"
+          data-rel="back"
+          >Back
+        </a>
+        <h1>Budgeting Tracker</h1>
+      </header>
+      <!--Expense Screen Options-->
+      <section id="budgetingMainSection" data-role="content">
+        <h1>Budgeting Page</h1>
+      </section>
+      <!--Completed Footer-->
+      <footer data-role="footer" data-position="fixed">
+        <!--Nav bar-->
+        <div data-role="navbar" data-iconpos="top">
+          <ul>
+            <li id="navbarListItem">
+              <a href="#pageHome" data-icon="home">Home</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageExpenses" data-icon="calendar">Expenses</a>
+            </li>
+            <li>
+              <a
+                href="#pageBudgeting"
+                data-icon="user"
+                class="ui-btn-active ui-state-persist"
+                >Budgeting</a
+              >
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageSavings" data-icon="shop">Savings & Investments</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageAbout" data-icon="info">About the Devs</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!--Savings and Investments Page-->
+    <div id="pageSavings" data-role="page">
+      <!--Completed Header-->
+      <header data-role="header" data-position="fixed">
+        <!--Back Button-->
+        <a
+          data-role="button"
+          data-icon="back"
+          data-inline="true"
+          data-rel="back"
+          >Back
+        </a>
+        <h1>Savings and Investments Tracker</h1>
+      </header>
+      <!--Savings Screen Options-->
+      <section id="savingsMainSection" data-role="content">
+        <h1>Savings Page</h1>
+      </section>
+      <!--Completed Footer-->
+      <footer data-role="footer" data-position="fixed">
+        <!--Nav bar-->
+        <div data-role="navbar" data-iconpos="top">
+          <ul>
+            <li id="navbarListItem">
+              <a href="#pageHome" data-icon="home">Home</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageExpenses" data-icon="calendar">Expenses</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageBudgeting" data-icon="user">Budgeting</a>
+            </li>
+            <li>
+              <a
+                href="#pageSavings"
+                data-icon="shop"
+                class="ui-btn-active ui-state-persist"
+                >Savings & Investments</a
+              >
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageAbout" data-icon="info">About the Devs</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!--About ****NEEDS INPUT FROM KAROLINA AND EAZER--> 
+    <div id="pageAbout" data-role="page">
+      <!--Completed Header-->
+      <header data-role="header" data-position="fixed">
+        <!--Back Button-->
+        <a
+          data-role="button"
+          data-icon="back"
+          data-inline="true"
+          data-rel="back"
+          >Back
+        </a>
+        <h1>About the devs</h1>
+      </header>
+      <!--Savings Screen Options-->
+      <section id="aboutMainSection" data-role="content" >
+        <ul id="aboutList" data-role="listview" class="ui-listview-inset">
+            <li>
+                <h3>Griffin Murphy</h3>
+                <p>Born and raised in Kitchener, ON. Currently a Digitial Marketer for Bloom Intuitive Technology Solutions Inc.</p>
+            </li>
+            <li>
+                <h3>Aasim Mukadam</h3>
+                <p>
+                  Born and raised in Zambia. Known for his abilities in database management and web-based coding. 
+                </p>
+            </li>
+            <li>
+                <h3>Eazer Daguay</h3>
+                <p><!--ADD YOUR BIO HERE-->Description Here</p>
+            </li>
+            <li>
+                <h3>Karolina Ziembicki</h3>
+                <p><!--ADD YOUR BIO HERE-->Description Here</p>
+            </li>
+          </ul>
+      </section>
+      <!--Completed Footer-->
+      <footer data-role="footer" data-position="fixed">
+        <!--Nav bar-->
+        <div data-role="navbar" data-iconpos="top" >
+          <ul>
+            <li id="navbarListItem">
+              <a class="navbarlink" href="#pageHome" data-icon="home">Home</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageExpenses" data-icon="calendar">Expenses</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageBudgeting" data-icon="user">Budgeting</a>
+            </li>
+            <li id="navbarListItem">
+              <a href="#pageSavings" data-icon="shop">Savings & Investments</a>
+            </li>
+            <li >
+              <a
+                href="#pageAbout"
+                data-icon="info"
+                class="ui-btn-active ui-state-persist"
+                >About the Devs</a
+              >
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
